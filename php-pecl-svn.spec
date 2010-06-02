@@ -1,14 +1,14 @@
-%define		_modname	svn
-%define		_status		beta
+%define		modname	svn
+%define		status	stable
 Summary:	PHP Bindings for the Subversion Revision control system
 Summary(pl.UTF-8):	Dowiązania PHP do systemou kontroli rewizji Subversion
-Name:		php-pecl-%{_modname}
-Version:	0.5.1
+Name:		php-pecl-%{modname}
+Version:	1.0.0
 Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
-Source0:	http://pecl.php.net/get/%{_modname}-%{version}.tgz
-# Source0-md5:	0b9a6d1c3fdac07b10430cd5c1d2a17d
+Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
+# Source0-md5:	f89e87ff86978a121b9e3ddf69d523c1
 URL:		http://pecl.php.net/package/svn/
 BuildRequires:	php-devel >= 3:5.0.0
 BuildRequires:	re2c >= 0.12.0
@@ -22,20 +22,20 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Bindings for the Subversion revision control system, providing a
 method for manipulating a working copy or repository with PHP.
 
-In PECL status of this extension is: %{_status}.
+In PECL status of this extension is: %{status}.
 
 %description -l pl.UTF-8
 Pakiet ten dostarcza dowiązań do systemu kontroli rewizji Subversion,
 dostarczając metod do obróbki lokalną kopią lub repozytorium z poziomu
 PHP.
 
-To rozszerzenie ma w PECL status: %{_status}.
+To rozszerzenie ma w PECL status: %{status}.
 
 %prep
-%setup -q -c
+%setup -qc
+mv %{modname}-%{version}/* .
 
 %build
-cd %{_modname}-%{version}
 phpize
 %configure
 %{__make} \
@@ -46,12 +46,11 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d
 
 %{__make} install \
-	-C %{_modname}-%{version} \
-	INSTALL_ROOT=$RPM_BUILD_ROOT \
-	EXTENSION_DIR=%{php_extensiondir}
-cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{_modname}.ini
-; Enable %{_modname} extension module
-extension=%{_modname}.so
+	EXTENSION_DIR=%{php_extensiondir} \
+	INSTALL_ROOT=$RPM_BUILD_ROOT
+cat <<'EOF' > $RPM_BUILD_ROOT%{php_sysconfdir}/conf.d/%{modname}.ini
+; Enable %{modname} extension module
+extension=%{modname}.so
 EOF
 
 %clean
@@ -67,6 +66,6 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%doc %{_modname}-%{version}/{CREDITS,EXPERIMENTAL}
-%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{_modname}.ini
-%attr(755,root,root) %{php_extensiondir}/%{_modname}.so
+%doc CREDITS EXPERIMENTAL
+%config(noreplace) %verify(not md5 mtime size) %{php_sysconfdir}/conf.d/%{modname}.ini
+%attr(755,root,root) %{php_extensiondir}/%{modname}.so
