@@ -3,12 +3,12 @@
 Summary:	PHP Bindings for the Subversion Revision control system
 Summary(pl.UTF-8):	Dowiązania PHP do systemou kontroli rewizji Subversion
 Name:		php-pecl-%{modname}
-Version:	1.0.0
-Release:	2
+Version:	1.0.2
+Release:	1
 License:	PHP 3.01
 Group:		Development/Languages/PHP
 Source0:	http://pecl.php.net/get/%{modname}-%{version}.tgz
-# Source0-md5:	f89e87ff86978a121b9e3ddf69d523c1
+# Source0-md5:	45407d43f1055eb72e149d1862f3daa1
 URL:		http://pecl.php.net/package/svn/
 BuildRequires:	php-devel >= 3:5.0.0
 BuildRequires:	re2c >= 0.12.0
